@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOAT-SLM: A Spoken Language Model with User Vocal Persona-Awareness</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="cb987c55-28cc-450b-adee-a200240623f6"></script>
+</head>
+<body>
+
+    <!-- Page 0 -->
+    <section class="container" id="section0">
+        <h1>GOAT-SLM: A Spoken Language Model with User Vocal Persona-Awareness</h1>
+        <div class="author">
+            <p>TeleAI</p>
+        </div>
+
+        <!-- paper -->
+        <section class="paper-section">
+            <h2>Abstract</h2>
+            <p class="paper-description">
+                Recent advances in end-to-end spoken language models (SLMs) have significantly improved the ability of AI systems to engage in natural spoken interactions. However, most existing models treat speech merely as a medium for linguistic information, often overlooking the rich paralinguistic cues embedded in human speech, such as dialect, age, emotion, and non-speech vocal expressions. In this work, we propose GOAT-SLM, a novel spoken language model that integrates vocal persona perception into speech-based dialogue. GOAT-SLM adopts a dual-modality head architecture, which decouples linguistic modeling from acoustic realization, allowing the model to maintain strong language understanding while supporting expressive speech generation. To further enhance model efficiency and versatility, we introduce a modular, staged training strategy that progressively aligns linguistic and paralinguistic information using large-scale multimodal data. We also establish TELEVAL, a comprehensive evaluation benchmark designed to assess both semantic intelligence and vocal persona-aware responses in Chinese spoken dialogue scenarios. Experimental results show that GOAT-SLM achieves balanced performance across semantic and paralinguistic tasks and outperforms existing open-source models in several dimensions of user vocal persona perception and response. This work highlights the importance of modeling beyond linguistic content and opens avenues for more personalized, empathetic spoken language interaction systems.
+            </p>
+        </section>
+
+        <!-- <section class="video-section">
+            <div class="video-grid">
+                <div class="video-card">
+                    <video class="intro-video" controls>
+                        <source src="case/demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-caption">
+                        <div class="caption-text">GOAT-SLM: A Spoken Language Model with User Vocal Persona-Awareness</div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+    </section>
+
+    <!-- Demo Section -->
+
+    <!-- page 1 -->
+    <section class="container" id="section1">
+        <h2>1. Constructing Data using GOAT-TTS</h2>
+        <h4>During Stage 3-2, using the collected multi-dimensional style data as speech prompts, the training data is constructed using GOAT-TTS. Below are some audio samples. Note: The term "audience" here does not refer to pronunciation style but rather the tone of speech directed at specific groups. For example, when talking with the elderly, the speaking rate may slow down.</h4>
+        <div class="demo-section">
+            <div class="table-container">
+                <table class="zebra-table" id="section1-table">
+                    <tr>
+                        <th style="min-width:200px;">Audience</th>
+                        <th style="min-width:200px;">Emotion</th>
+                        <th style="min-width:400px;">Text</th>
+                        <th>Speech</th>
+                    </tr>
+<!-- TODO  mark-->
+                    <tr>
+                        <td rowspan="4">elderly</td>
+                        <td rowspan="2">happy</td>
+                        <td>那可太好了，跳广场舞既能锻炼身体，又能交朋友。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/laoren_hapy_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>那可得好好准备准备呀！您有没有想好要做些什么菜呀！要是拿不定主意，我可以给您出出注意哦~</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/laoren_hapy_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">neutral</td>
+                        <td>好嘞，我记住啦！您有什么想聊的，都可以给我说哦~</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/laoren_neu_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>嗯，您说的是不是凤凰传奇的歌呀？她们好多曲子都非常适合广场舞，比如说最炫民族风就特别火。或者您在给我点别的提示，比如歌词什么的。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/laoren_neu_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+<!-- TODO  mark-->
+                    <tr>
+                        <td rowspan="6">children</td>
+                        <td rowspan="2">happy</td>
+                        <td>呵呵，好呀好呀，五岁的小朋友可可爱啦。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/ertong_hap_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>可能是被什么声音吓到啦，或者它只是路过这里看看，别失望呀，说不定它一会还会飞回来呢？要是它真的迷路了，也许是去找同伴帮忙啦！你不是要去幼儿园吗？等你回来啦，说不定它就在窗外等着你呢？</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/ertong_hap_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">surprise</td>
+                        <td>哇，这确实挺神奇的呢，说不定它是把窗户当成可以找食物的地方啦，或者它觉得是窗户里的影子很有趣。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/ertong_sur_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>哇，小乌龟好厉害呀。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/ertong_sur_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">comfort</td>
+                        <td>有可能哦，说不定它看你在屋里觉得很好奇，不过小鸟可能不太习惯室内的环境，你可以试着打开窗户让它能自由的飞走，如果它想和你玩，可能会在窗外停留一会。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/ertong_comfort_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>那有点可惜呢，不过说不定等你放学回来，小鸟还会再来找你玩的，你去幼儿园的时候可以想想给它取个名字，回来要是还能见到它，就可以叫它啦。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/ertong_comfort_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+<!-- TODO  mark-->
+                    <tr>
+                        <td rowspan="4">adult</td>
+                        <td rowspan="2">neutral</td>
+                        <td>嗯，如果是工作或者家里的突发情况，那确实也挺无奈的。不过老是这样对你来说也不公平，要不然下次再遇到这种情况让他一定提前跟你说，这样的话你也能重新安排自己的时间，而且也可以看看他有没有补偿措施。比如下次找个更合适的时间一起看个电影，再加上一顿好吃的。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/chengren_neu_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>如果一直都这样，那你在这段友谊里真的付出了太多了吧，却没有得到相应的尊重和关心。或许你要先冷静一下，暂时不要主动联系他，看看他的反应。要是他能够意识到自己的问题，主动来跟你道歉和好，那可以再给他一次机会，好好聊聊以后该怎么相处。但如果是他还没什么反应，那你也许就该明白这个人不值得你再这么付出了，你得把时间和精力留给真正在乎你的人。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/chengren_neu_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">comfort</td>
+                        <td>哎，这事确实挺让人难受的，文广要是能救回来就好了，他家里人得多着急啊！</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/chengren_comfort_1.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    <tr>
+                        <td>这也不好说呢，也许他真是没办法，不过他要是一直这么敷衍你，那确实会让人心里很不爽，你可以再给他一次机会，跟他把话说清楚，看看他的态度和表现，要他还是这样，那你再做决定也不迟啊。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/1_GOAT-TTS/chengren_comfort_2.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- page 2 -->
+    <section class="container" id="section2">
+        <h2>2. GOAT-SLM: End-to-End Speech Interaction</h2>
+        <h3 id="section2.1">2.1 Dialect Following</h3>
+        <div class="demo-section">
+            <div class="table-container">
+                <table class="zebra-table">
+                    <tr>
+                        <th style="width:200px">Dialect</th>
+                        <th>Speech Query</th>
+                        <th style="min-width:600px;">Text Response</th>
+                        <th>Speech Response</th>
+                    </tr>
+                    
+                    <tr>
+                        <td rowspan="1">cantonese</td>
+                        <td> <div class="demo-item"><audio controls><source src="case/2_dialect_follow/1_cantonese_q.wav" type="audio/aac"></audio></div></td>
+                        <td>你可以先去网上睇下价钱，对比下实体店。或者等商场搞活动的时候去，一般都会打折。还有，可以多留意下社交媒体上的优惠信息，有时候会有一些隐藏的折扣。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/2_dialect_follow/1_cantonese_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+                    
+                    <tr>
+                        <td rowspan="1">cantonese</td>
+                        <td> <div class="demo-item"><audio controls><source src="case/2_dialect_follow/2_cantonese_q.wav" type="audio/aac"></audio></div></td>
+                        <td>可以考虑多功能沙发床，佢既可以做沙发又可以变成床，节省空间。另外，折叠茶几也系好选择，唔使时可以收起，节省空间。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/2_dialect_follow/2_cantonese_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="1">sichuanese</td>
+                        <td> <div class="demo-item"><audio controls><source src="case/2_dialect_follow/3_sichuan_q.wav" type="audio/aac"></audio></div></td>
+                        <td>要不你去郊外走一哈儿，呼吸下新鲜空气，看看风景。要是喜欢刺激点的，可以去爬山或者坐过山车啥的。要是想轻松点，就去公园里散散步，看看花花草草。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/2_dialect_follow/3_sichuan_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="1">northeastern</td>
+                        <td> <div class="demo-item"><audio controls><source src="case/2_dialect_follow/4_dongbei_q.wav" type="audio/aac"></audio></div></td>
+                        <td>可以啊，像希沃白板、Nearpod、Kahoot! 这些工具都挺不错的。希沃白板可以用来做互动课件，Nearpod能进行在线教学，Kahoot! 则适合做知识竞赛。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/2_dialect_follow/4_dongbei_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="1">henan</td>
+                        <td> <div class="demo-item"><audio controls><source src="case/2_dialect_follow/5_henan_q.wav" type="audio/aac"></audio></div></td>
+                        <td>白天的课周末一般没有，只在工作日有。关于太阳的短讲座，它通常会讲太阳的结构、太阳系的形成、太阳对地球的影响等。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/2_dialect_follow/5_henan_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="1">shanghainese</td>
+                        <td> <div class="demo-item"><audio controls><source src="case/2_dialect_follow/6_shanghai_q.wav" type="audio/aac"></audio></div></td>
+                        <td>北京好个地方可多啦！像故宫、颐和园、八达岭长城都特别有名。还有天安门广场、鸟巢、水立方，都是现代北京的标志。要是喜欢文化，国博、北大也值得一去。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/2_dialect_follow/6_shanghai_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <h3 id="section2.2">2.2 Empathetic Generation</h3>
+        <div class="demo-section">
+            <div class="table-container">
+                <table class="zebra-table">
+                    <tr>
+                        <th>Speech Query</th>
+                        <th style="min-width:600px;">Text Response</th>
+                        <th style="width:200px">Emotion</th>
+                        <th>Speech Response</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/1_comfort_q.wav" type="audio/aac"></audio></div></td>
+                        <td>我很抱歉你失去了这么重要的家人。宠物是我们生命中的一部分，他们的离开总是让人难以接受。你可以试着回忆和他在一起的美好时光，或者把他的照片放在身边，这样可以让你感到他的存在。如果你需要倾诉，我在这里听你说。</td>
+                        <td>comfort</td>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/1_comfort_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/2_sur_q.wav" type="audio/aac"></audio></div></td>
+                        <td>哇塞！这太棒啦！你肯定付出了很多努力，终于收获了好成绩。全班第一可太厉害了，为你骄傲！</td>
+                        <td>surprise</td>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/2_sur_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/3_hap_q.wav" type="audio/aac"></audio></div></td>
+                        <td>这听起来太美好了！花开的瞬间总是充满惊喜和快乐。你可以拍下来，把这份美丽记录下来，以后看到照片也能感受到当时的喜悦。</td>
+                        <td>happy</td>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/3_hap_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/4_comfort_q.wav" type="audio/aac"></audio></div></td>
+                        <td>别太难过啦，老师也是希望你能够进步，只是方式不太恰当。你先想想自己最近学习上有没有什么问题，比如是不是哪里没学懂，或者时间管理上有什么不足。要是能解决这些问题，下次考试肯定能有好成绩。</td>
+                        <td>comfort</td>
+                        <td><div class="demo-item"><audio controls><source src="case/3_empathetic_generation/4_comfort_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+
+        <h3 id="section2.3">2.3 Age Perception</h3>
+        <div class="demo-section">
+            <div class="table-container">
+                <table class="zebra-table">
+                    <tr>
+                        <th style="width:200px">Age</th>
+                        <th>Speech Query</th>
+                        <th style="min-width:600px;">Text Response</th>
+                        <th>Speech Response</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>children</td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/1_children_q.wav" type="audio/aac"></audio></div></td>
+                        <td>对呀，家里的运动可有意思啦！可以跳绳、踢毽子，或者和爸爸妈妈一起打羽毛球。要是家里空间小，就来个家庭瑜伽，伸展身体也很棒哦！</td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/1_children_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>children</td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/2_children_q.wav" type="audio/aac"></audio></div></td>
+                        <td>好呀！我们可以先从简单的开始，比如画一个太阳，用黄色画一个大圆圈，再画上几道光芒。或者画一只小猫咪，先画一个椭圆形当身体，再画上小爪子和尾巴。你要是有别的想法，也可以告诉我，我们一起画！                        </td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/2_children_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>adault</td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/adult_q.wav" type="audio/aac"></audio></div></td>
+                        <td>苹果、橘子、香蕉的英文单词分别是：<br><br>
+
+                            - **Apple**<br>
+                            - **Orange**<br>
+                            - **Banana**<br><br>
+                            
+                            这三个词都是单音节名词，拼写和发音较为简单，是常见的水果名称。
+                            </td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/adult_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>elderly</td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/elderly_q.wav" type="audio/aac"></audio></div></td>
+                        <td>别担心呀，年老了也可以去一些近的地方玩呢。像周边的公园、博物馆这些地方都挺好的，既能放松心情，又能增长知识。而且现在交通也方便，有专门的老年人旅游线路呢。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/4_age_perception/elderly_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <h3 id="section2.4">2.4 Multi-turn Dialogue</h3>
+        <div class="demo-section">
+            <div class="table-container">
+                <table class="zebra-table">
+                    <tr>
+                        <th style="width:200px">Turn</th>
+                        <th>Speech Query</th>
+                        <th style="min-width:600px;">Text Response</th>
+                        <th>Speech Response</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>turn-1</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-1_q.wav" type="audio/aac"></audio></div></td>
+                        <td>我理解你的心情，动漫角色的离去总是让人感到难过。他们陪伴我们度过了许多美好的时光，现在突然失去他们，确实会让人感到失落和悲伤。不过，我们可以把这份情感转化为对他们的纪念，比如回忆他们带给我们的快乐，或者创造一些新的方式来纪念他们。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-1_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>turn-2</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-2_q.wav" type="audio/aac"></audio></div></td>
+                        <td>当然可以啦！我来给你讲个笑话。为什么小明的书包里会有一只猫？因为小明是猫王的粉丝，他想让猫王在书包里跟他一起上学。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-2_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>turn-3</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-3_q.wav" type="audio/aac"></audio></div></td>
+                        <td>我明白你的心情，失去一个最爱的动漫角色确实会让人感到非常难过。不过，我们可以试着把注意力转移到其他事情上，比如看一部新的动漫，或者和朋友一起回忆那些美好的时光。你也可以试着写下来你的感受，这样可能会让你感觉好一些。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-3_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>turn-4</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-4_q.wav" type="audio/aac"></audio></div></td>
+                        <td>当然有啦！如果你喜欢看动漫，可以试试《海贼王》，它是一部非常经典的动漫，讲述了主角路飞和他的伙伴们为了寻找传说中的“One Piece”而踏上冒险之旅的故事。还有《火影忍者》，它是一部关于忍者世界的动漫，讲述了主人公鸣人从一个孤独的忍者成长为强大忍者的历程。如果你喜欢看动画片，可以试试《千与千寻》，它是一部非常感人的动画片，讲述了一个小女孩在神秘世界的冒险经历。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-4_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td>turn-5</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-5_q.wav" type="audio/aac"></audio></div></td>
+                        <td>不客气，希望你能找到喜欢的动漫，心情也能好起来。如果还有其他问题，随时告诉我哦！</td>
+                        <td><div class="demo-item"><audio controls><source src="case/5_multi-turn_dialogue/turn-5_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        
+        <h3 id="section2.5">2.4 Tongue Twisters & Classical Poetry</h3>
+        <div class="demo-section">
+            <div class="table-container">
+                <table class="zebra-table">
+                    <tr>
+                        <th>Speech Query</th>
+                        <th style="min-width:600px;">Text Response</th>
+                        <th>Speech Response</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="demo-item"><audio controls><source src="case/6_tongue_twisters_classical_poetry/1_q.wav" type="audio/aac"></audio></div></td>
+                        <td>当然可以啦！绕口令可有趣了，我来给你编几句：<br><br>
+
+                            1. 四是四，十是十，十四是十四，四十是四十。<br>
+                            2. 八百标兵奔北坡，炮兵并排北边跑。<br>
+                            3. 红鲤鱼与绿鲤鱼与驴。<br>
+                            4. 天上有个半边月，水里有个半边月。<br>
+                            5. 一口吃掉三个瓜，三个瓜加上三个半瓜，一共是几个瓜？<br><br>
+                            
+                            希望这些绕口令能让你开怀大笑，感觉轻松愉快！
+                            </td>
+                        <td><div class="demo-item"><audio controls><source src="case/6_tongue_twisters_classical_poetry/1_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="demo-item"><audio controls><source src="case/6_tongue_twisters_classical_poetry/2_q.wav" type="audio/aac"></audio></div></td>
+                        <td> “昔闻洞庭水，今上岳阳楼。吴楚东南坼，乾坤日夜浮。亲朋无一字，老病有孤舟。戎马关山北，凭轩涕泗流。”<br>
+
+                            这首诗是杜甫在安史之乱期间，于唐代宗大历三年（768年）秋，漂泊到湖南岳阳时所作。诗中描绘了洞庭湖的壮丽景色，表达了诗人对国家命运的忧虑和对人民疾苦的同情，以及自己漂泊无依的孤独感。</td>
+                        <td><div class="demo-item"><audio controls><source src="case/6_tongue_twisters_classical_poetry/2_a.wav" type="audio/aac"></audio></div></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 July, TeleAI Team. Acknowledge <a href="https://github.com/index-tts/index-tts2.github.io" target="_blank" rel="noopener noreferrer">index-tts2</a>, we have referenced their HTML rendering code. </p>
+    </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const tables = document.querySelectorAll(".zebra-table");
+            tables.forEach(table => {
+                logicalTableStyle(table);
+            });
+        });
+    </script>
+</body>
+</html>
