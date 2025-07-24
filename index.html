@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOAT-SLM: A Spoken Language Model with User Vocal Persona-Awareness</title>
+    <title>GOAT-SLM: A Spoken Language Model with Paralinguistic and Speaker Characteristic Awareness</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="cb987c55-28cc-450b-adee-a200240623f6"></script>
@@ -12,7 +12,7 @@
 
     <!-- Page 0 -->
     <section class="container" id="section0">
-        <h1>GOAT-SLM: A Spoken Language Model with User Vocal Persona-Awareness</h1>
+        <h1>GOAT-SLM: A Spoken Language Model with Paralinguistic and Speaker Characteristic Awareness</h1>
         <div class="author">
             <p>TeleAI</p>
         </div>
@@ -21,7 +21,7 @@
         <section class="paper-section">
             <h2>Abstract</h2>
             <p class="paper-description">
-                Recent advances in end-to-end spoken language models (SLMs) have significantly improved the ability of AI systems to engage in natural spoken interactions. However, most existing models treat speech merely as a medium for linguistic information, often overlooking the rich paralinguistic cues embedded in human speech, such as dialect, age, emotion, and non-speech vocal expressions. In this work, we propose GOAT-SLM, a novel spoken language model that integrates vocal persona perception into speech-based dialogue. GOAT-SLM adopts a dual-modality head architecture, which decouples linguistic modeling from acoustic realization, allowing the model to maintain strong language understanding while supporting expressive speech generation. To further enhance model efficiency and versatility, we introduce a modular, staged training strategy that progressively aligns linguistic and paralinguistic information using large-scale multimodal data. We also establish TELEVAL, a comprehensive evaluation benchmark designed to assess both semantic intelligence and vocal persona-aware responses in Chinese spoken dialogue scenarios. Experimental results show that GOAT-SLM achieves balanced performance across semantic and paralinguistic tasks and outperforms existing open-source models in several dimensions of user vocal persona perception and response. This work highlights the importance of modeling beyond linguistic content and opens avenues for more personalized, empathetic spoken language interaction systems.
+                Recent advances in end-to-end spoken language models (SLMs) have significantly improved the ability of AI systems to engage in natural spoken interactions. However, most existing models treat speech merely as a vehicle for linguistic content, often overlooking the rich paralinguistic and speaker characteristic cues embedded in human speech, such as dialect, age, emotion, and non-speech vocalizations. In this work, we introduce GOAT-SLM, a novel spoken language model with paralinguistic and speaker characteristic awareness, designed to extend spoken language modeling beyond text semantics. GOAT-SLM adopts a dual-modality head architecture that decouples linguistic modeling from acoustic realization, enabling robust language understanding while supporting expressive and adaptive speech generation. To enhance model efficiency and versatility, we propose a modular, staged training strategy that progressively aligns linguistic, paralinguistic, and speaker characteristic information using large-scale speech-text corpora. Experimental results on TELEVAL, a multi-dimensional evaluation benchmark, demonstrate that GOAT-SLM achieves well-balanced performance across both semantic and non-semantic tasks, and outperforms existing open-source models in handling emotion, dialectal variation, and age-sensitive interactions. This work highlights the importance of modeling beyond linguistic content and advances the development of more natural, adaptive, and socially aware spoken language systems.
             </p>
         </section>
 
@@ -46,12 +46,12 @@
     <!-- page 1 -->
     <section class="container" id="section1">
         <h2>1. GOAT-TTS: Speech Data Construction</h2>
-        <h4>During Stage 3-2, using the collected multi-dimensional style data as speech prompts, the training data is constructed using GOAT-TTS. Below are some audio samples. Note: The term "audience" here does not refer to pronunciation style but rather the tone of speech directed at specific groups. For example, when talking with the elderly, the speaking rate may slow down.</h4>
+        <h4>During Stage 3-2, using the collected multi-dimensional style data as speech prompts, the training data is constructed using GOAT-TTS. Below are some audio samples. Note: The term "Listener" here does not refer to pronunciation style but rather the tone of speech directed at specific groups. For example, when talking with the elderly, the speaking rate may slow down.</h4>
         <div class="demo-section">
             <div class="table-container">
                 <table class="zebra-table" id="section1-table">
                     <tr>
-                        <th style="min-width:200px;">Audience</th>
+                        <th style="min-width:200px;">Target Listener</th>
                         <th style="min-width:200px;">Emotion</th>
                         <th style="min-width:400px;">Text</th>
                         <th>Speech</th>
@@ -294,21 +294,21 @@
             <div class="table-container">
                 <table class="zebra-table">
                     <tr>
-                        <th style="width:200px">Cough</th>
+                        <th style="width:200px">Non-speech Vocalization</th>
                         <th>Speech Query</th>
                         <th style="min-width:600px;">Text Response</th>
                         <th>Speech Response</th>
                     </tr>
                     
                     <tr>
-                        <td>✅</td>
+                        <td>cough</td>
                         <td><div class="demo-item"><audio controls><source src="case/7_cough_perception/1_cough_q.wav" type="audio/aac"></audio></div></td>
                         <td>那肯定有啊，像麻辣火锅、麻婆豆腐、回锅肉都特别辣。不过你咳嗽这么厉害，可别吃太辣的啦，不然会更难受的。</td>
                         <td><div class="demo-item"><audio controls><source src="case/7_cough_perception/1_cough_a.wav" type="audio/aac"></audio></div></td>
                     </tr>
 
                     <tr>
-                        <td>✅</td>
+                        <td>throat clearing</td>
                         <td><div class="demo-item"><audio controls><source src="case/7_cough_perception/2_cough_q.wav" type="audio/aac"></audio></div></td>
                         <td>你是不是嗓子不舒服呀？要不先喝点水润润嗓子呢。北京可好吃的多啦，像烤鸭、炸酱面、豆汁儿都特别有名。不过你现在嗓子不舒服，还是先别吃太刺激的东西啦。</td>
                         <td><div class="demo-item"><audio controls><source src="case/7_cough_perception/2_cough_a.wav" type="audio/aac"></audio></div></td>
